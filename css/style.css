@@ -1,0 +1,30 @@
+body {
+  text-align: center;
+  color: #efefef;
+  background-color: #424555;
+}
+
+.wrapper {
+  width: 800px;
+  display: inline-block;
+}
+
+.header {
+  margin-top: 50px;
+}
+
+.controls {
+  display: inline-flex;
+}
+
+.control {
+  margin: 20px;
+}
+
+.clock {
+  margin-left: 244px;
+  height: 300px;
+  width: 300px;
+  border: 3px solid #efefef;
+  border-radius: 50%;
+}
