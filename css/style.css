@@ -18,8 +18,20 @@ body {
 }
 
 .control {
+  align-content: center;
   margin: 20px;
 }
+
+.clickable {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+li {
+  display: inline;
+  padding: 0 5px;
+}
+
 
 .clock {
   margin-left: 244px;
