@@ -1,18 +1,19 @@
 $(document).ready(function($) {
-    let lengthBreak = 5;
     let lengthSession = 25;
+    let lengthBreak = 5;
+    let finishedSession = false;
+    let t = new CountDownTimer(lengthSession);
 
     $('.breakTimer').html(lengthBreak);
     $('.sessionTimer').html(lengthSession);
 
     // TODO: The below needs to be refactored desperately.
     // DRY up this code.
-
     // Decrease Break Length
     $('#decreaseBreakButton').click(function(event) {
         if (lengthBreak > 0) {
             lengthBreak -= 1;
-        };
+        }
         $('.breakTimer').html(lengthBreak);
     });
 
@@ -20,7 +21,7 @@ $(document).ready(function($) {
     $('#increaseBreakButton').click(function(event) {
         if (lengthBreak < lengthSession) {
             lengthBreak += 1;
-        };
+        }
         $('.breakTimer').html(lengthBreak);
     });
 
@@ -28,15 +29,15 @@ $(document).ready(function($) {
     $('#decreaseSessionButton').click(function(event) {
         if (lengthSession > 0) {
             lengthSession -= 1;
-        };
+        }
         $('.sessionTimer').html(lengthSession);
     });
 
     // Increase Session Length
-    $('#decreaseBreakButton').click(function(event) {
+    $('#increaseSessionButton').click(function(event) {
         if (lengthSession < 60) {
             lengthSession += 1;
-        };
+        }
         $('.sessionTimer').html(lengthSession);
     });
 
@@ -44,11 +45,15 @@ $(document).ready(function($) {
     // Start timer
     $('.clock').click(function(event) {
         /* Act on the event */
-        $('.clockTimeDisplay').html('<p>Clicked</p>');
 
-        // Get duration from setting button
-        let t = new CountDownTimer(lengthSession);
-        t.start();
+        if (!t.running) {
+            $('.clockTimeDisplay').html('<p>Clicked</p>');
+            // Get duration from setting button
+            // TODO: Implement setter/getters.
+            t.duration = finishedSession ? lengthBreak : lengthSession;
+            t.start();
+            finishedSession = !finishedSession;
+        };
     });
 });
 
@@ -68,6 +73,7 @@ function CountDownTimer(duration, granularity) {
 
 CountDownTimer.prototype.start = function() {
     if (this.running) {
+        // TODO: Implement pause function.
         return;
     }
     this.running = true;
@@ -79,16 +85,20 @@ CountDownTimer.prototype.start = function() {
         diff = that.duration - (((Date.now() - start) / 1000) | 0);
 
         if (diff > 0) {
-            console.log(diff);
-            $('.clockTimeDisplay').html('<p>Clicked</p><p>' + diff + ' seconds remaining.</p>');
+            // console.log(diff);
             setTimeout(timer, that.granularity);
         } else {
             diff = 0;
-            $('.clockTimeDisplay').html('<p>Click to start timer</p>');
+            // $('.clockTimeDisplay').html('<p>Click to start timer</p>');
             that.running = false;
         }
 
         obj = CountDownTimer.parse(diff);
+
+        // console.log(obj.minutes);
+        let secondString = obj.seconds > 9 ? obj.seconds : '0' + obj.seconds;
+        $('.clockTimeDisplay').html('<p>Clicked</p><p> Time remaining</p><p>' + obj.minutes + ':' + secondString + '</p>');
+
         that.tickFtns.forEach(function(ftn) {
             ftn.call(this, obj.minutes, obj.seconds);
         }, that);
