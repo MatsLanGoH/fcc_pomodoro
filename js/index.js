@@ -53,7 +53,10 @@ $(document).ready(function($) {
             t.duration = finishedSession ? lengthBreak : lengthSession;
             t.start();
             finishedSession = !finishedSession;
-        };
+        } else {
+            $('.clockTimeDisplay').html('<p>Don\'t stop me now!');
+            t.start();
+        }
     });
 });
 
@@ -69,11 +72,15 @@ function CountDownTimer(duration, granularity) {
     this.granularity = granularity || 1000;
     this.tickFtns = [];
     this.running = false;
+    this.timeoutID;
 }
 
 CountDownTimer.prototype.start = function() {
     if (this.running) {
         // TODO: Implement pause function.
+        console.log(timeoutID, 'Stopped');
+        window.clearTimeout(timeoutID);
+        this.running = false;
         return;
     }
     this.running = true;
@@ -85,8 +92,8 @@ CountDownTimer.prototype.start = function() {
         diff = that.duration - (((Date.now() - start) / 1000) | 0);
 
         if (diff > 0) {
-            // console.log(diff);
-            setTimeout(timer, that.granularity);
+            timeoutID = window.setTimeout(timer, that.granularity);
+            // console.log(timeoutID);
         } else {
             diff = 0;
             // $('.clockTimeDisplay').html('<p>Click to start timer</p>');
