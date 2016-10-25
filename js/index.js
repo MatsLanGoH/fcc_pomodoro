@@ -52,10 +52,12 @@ $(document).ready(function($) {
             // TODO: Implement setter/getters.
             t.duration = finishedSession ? lengthBreak : lengthSession;
             t.start();
-            finishedSession = !finishedSession;
+            // TODO Toggle Break Session timers.
+            // finishedSession = !finishedSession;
         } else {
             $('.clockTimeDisplay').html('<p>Don\'t stop me now!');
-            t.start();
+            // t.start();
+            t.toggle();
         }
     });
 });
@@ -72,16 +74,13 @@ function CountDownTimer(duration, granularity) {
     this.granularity = granularity || 1000;
     this.tickFtns = [];
     this.running = false;
+    this.stopped = 0;
     this.timeoutID;
 }
 
 CountDownTimer.prototype.start = function() {
     if (this.running) {
-        // TODO: Implement pause function.
-        console.log(timeoutID, 'Stopped');
-        window.clearTimeout(timeoutID);
-        this.running = false;
-        return;
+        // TODO: Is this check still needed here?
     }
     this.running = true;
     let start = Date.now(),
@@ -93,7 +92,7 @@ CountDownTimer.prototype.start = function() {
 
         if (diff > 0) {
             timeoutID = window.setTimeout(timer, that.granularity);
-            // console.log(timeoutID);
+            // console.log(diff);
         } else {
             diff = 0;
             // $('.clockTimeDisplay').html('<p>Click to start timer</p>');
@@ -101,7 +100,7 @@ CountDownTimer.prototype.start = function() {
         }
 
         obj = CountDownTimer.parse(diff);
-
+        // console.log(obj);
         // console.log(obj.minutes);
         let secondString = obj.seconds > 9 ? obj.seconds : '0' + obj.seconds;
         $('.clockTimeDisplay').html('<p>Clicked</p><p> Time remaining</p><p>' + obj.minutes + ':' + secondString + '</p>');
@@ -129,3 +128,12 @@ CountDownTimer.parse = function(seconds) {
         'seconds': (seconds % 60) | 0
     };
 };
+
+CountDownTimer.prototype.toggle = function() {
+    if (this.running) {
+        console.log(timeoutID, 'Paused');
+        window.clearTimeout(timeoutID);
+        this.running = false;
+        return;
+    };
+}
