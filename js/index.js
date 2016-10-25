@@ -45,20 +45,33 @@ $(document).ready(function($) {
     // Start timer
     $('.clock').click(function(event) {
         /* Act on the event */
-
         if (!t.running) {
             $('.clockTimeDisplay').html('<p>Clicked</p>');
             // Get duration from setting button
             // TODO: Implement setter/getters.
             t.duration = finishedSession ? lengthBreak : lengthSession;
             t.start();
-            // TODO Toggle Break Session timers.
-            // finishedSession = !finishedSession;
+            finishedSession = !finishedSession;
         } else {
             $('.clockTimeDisplay').html('<p>Don\'t stop me now!');
             // t.start();
             t.toggle();
         }
+    });
+
+    // Reset timer
+    $('#resetButton').click(function (event) {
+        if (t.paused) {
+            finishedSession = !finishedSession;
+
+            t.duration = finishedSession ? lengthBreak : lengthSession;
+
+        };
+        if (t.running) {
+            $('.clockTimeDisplay').html('<p>Reset</p>');
+            // t.duration = finishedSession ? lengthBreak : lengthSession;
+            t.reset();
+        };
     });
 });
 
@@ -74,8 +87,9 @@ function CountDownTimer(duration, granularity) {
     this.granularity = granularity || 1000;
     this.tickFtns = [];
     this.running = false;
-    this.stopped = 0;
+    this.paused = false;
     this.timeoutID;
+    this.diff;
 }
 
 CountDownTimer.prototype.start = function() {
@@ -83,9 +97,9 @@ CountDownTimer.prototype.start = function() {
         // TODO: Is this check still needed here?
     }
     this.running = true;
-    let start = Date.now(),
+    var start = Date.now(),
         that = this,
-        diff, obj;
+        obj;
 
     (function timer() {
         diff = that.duration - (((Date.now() - start) / 1000) | 0);
@@ -95,6 +109,7 @@ CountDownTimer.prototype.start = function() {
             // console.log(diff);
         } else {
             diff = 0;
+            that.finished = true;
             // $('.clockTimeDisplay').html('<p>Click to start timer</p>');
             that.running = false;
         }
@@ -129,11 +144,20 @@ CountDownTimer.parse = function(seconds) {
     };
 };
 
+CountDownTimer.prototype.reset = function() {
+    window.clearTimeout(timeoutID);
+    this.start();
+}
+
 CountDownTimer.prototype.toggle = function() {
-    if (this.running) {
-        console.log(timeoutID, 'Paused');
+    if (this.paused) {
+        // console.log(timeoutID, 'Restarting');
+        this.duration = diff;
+        this.start();
+    } else {
+        // console.log(timeoutID, this.duration, diff, 'Paused');
         window.clearTimeout(timeoutID);
-        this.running = false;
-        return;
-    };
+    }
+    this.paused = !this.paused;
+    return;
 }

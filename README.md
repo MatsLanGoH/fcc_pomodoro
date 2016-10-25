@@ -7,12 +7,12 @@
 - [OK] I can start a 25 minute pomodoro.
 - [TODO] The timer will go off once 25 minutes has elapsed.
 - [TODO] I can reset the clock for my next pomodoro.
-- [TODO] I can customize the length of each pomodoro.
+- [OK] I can customize the length of each pomodoro.
 
 ## Additional features (aka That's no moon!)
 - [OK] After a pomodoro has finished, there will be a break counter
 - [OK] I can customize the length of each break as well.
-- [TODO] I can pause and resume a counter.
+- [OK] I can pause and resume a counter.
 
 ## Visual features (aka Puttin' on the Ritz)
 - [TODO] Fancy fonts!
