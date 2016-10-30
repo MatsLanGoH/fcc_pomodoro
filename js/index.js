@@ -53,7 +53,7 @@ $(document).ready(function($) {
             t.start();
             finishedSession = !finishedSession;
         } else {
-            $('.clockTimeDisplay').html('<p>Don\'t stop me now!');
+            $('.clockTimeDisplay').html('<p>Paused</p>');
             // t.start();
             t.toggle();
         }
@@ -118,8 +118,8 @@ CountDownTimer.prototype.start = function() {
         // console.log(obj);
         // console.log(obj.minutes);
         let secondString = obj.seconds > 9 ? obj.seconds : '0' + obj.seconds;
-        $('.clockTimeDisplay').html('<p>Clicked</p><p> Time remaining</p><p>' + obj.minutes + ':' + secondString + '</p>');
-
+        // $('.clockTimeDisplay').html('<p>Clicked</p><p> Time remaining</p><p>' + obj.minutes + ':' + secondString + '</p>');
+        $('.clockTimeDisplay').html('<p>' + obj.minutes + ':' + secondString + '</p>');
         that.tickFtns.forEach(function(ftn) {
             ftn.call(this, obj.minutes, obj.seconds);
         }, that);

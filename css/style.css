@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
 body {
+  font-family: 'Source Code Pro', monospace;
   text-align: center;
-  color: #efefef;
-  background-color: #424555;
+  color: #0c0d0c;
+  background-color: #f1ea36;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .wrapper {
@@ -19,7 +28,12 @@ body {
 
 .control {
   align-content: center;
+  text-align: center;
   margin: 20px;
+}
+
+.timerControls {
+  padding: 0 0;
 }
 
 .clickable {
@@ -29,14 +43,27 @@ body {
 
 li {
   display: inline;
+  text-align: center;
   padding: 0 5px;
 }
 
 
 .clock {
+  /*position: relative;*/
   margin-left: 244px;
   height: 300px;
   width: 300px;
-  border: 3px solid #efefef;
+  border: 3px solid #0c0d0c;
   border-radius: 50%;
+}
+
+.clockTimeDisplay {
+  font-size: 4em;
+  /*position: absolute;*/
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*height: 30%;*/
+  /*width: 50%;*/
+  margin: 35% 0;
+  text-align: center;
 }
