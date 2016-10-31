@@ -57,6 +57,15 @@ li {
   border-radius: 50%;
 }
 
+.pulse-timing {
+  -webkit-animation-duration: 10ms;
+  animation-duration: 10ms;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
 .green-pattern {
   background: repeating-radial-gradient(
     circle,
@@ -84,4 +93,5 @@ li {
   /*width: 50%;*/
   margin: 35% 0;
   text-align: center;
+
 }

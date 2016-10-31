@@ -61,19 +61,19 @@ $(document).ready(function($) {
             finishedSession = !finishedSession;
 
             // Set color according to state.
-            $('.clock').addClass('green-pattern');
+            $(this).addClass('green-pattern');
         } else {
             $('.clockTimeDisplay').html('<p>Paused</p>');
             // Remove colors from clock.
-            $('.clock').addClass('red-pattern');
+            $(this).addClass('red-pattern');
+            $(this).children().removeClass('animated pulse pulse-timing');
 
             // $('.clock').removeClass('green-pattern red-pattern');
             // t.start();
             t.toggle();
         }
-
         if (!t.paused) {
-          $('.clock').removeClass('red-pattern');
+            $(this).removeClass('red-pattern');
 
         }
     });
@@ -81,7 +81,7 @@ $(document).ready(function($) {
     // Reset timer
     // TODO: This doesn't work correctly yet.
     //       Timer seems to keep going, or multiple timers are going.
-    $('#resetButton').click(function (event) {
+    $('#resetButton').click(function(event) {
         if (t.paused) {
             finishedSession = !finishedSession;
             t.duration = finishedSession ? lengthBreak : lengthSession;
@@ -90,17 +90,12 @@ $(document).ready(function($) {
         };
         if (t.running) {
             $('.clock').removeClass('red-pattern');
-
             $('.clockTimeDisplay').html('<p>Reset</p>');
             // t.duration = finishedSession ? lengthBreak : lengthSession;
             t.reset();
         };
     });
 });
-
-
-
-
 
 //
 // CountDownTimer function
@@ -135,6 +130,7 @@ CountDownTimer.prototype.start = function() {
             that.finished = true;
             // $('.clockTimeDisplay').html('<p>Click to start timer</p>');
             that.running = false;
+            // alert('Finished!');
         }
 
         obj = CountDownTimer.parse(diff);
@@ -142,6 +138,10 @@ CountDownTimer.prototype.start = function() {
         // console.log(obj.minutes);
         let secondString = obj.seconds > 9 ? obj.seconds : '0' + obj.seconds;
         // $('.clockTimeDisplay').html('<p>Clicked</p><p> Time remaining</p><p>' + obj.minutes + ':' + secondString + '</p>');
+        $('.clockTimeDisplay').addClass('animated pulse pulse-timing')
+            .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                $('.clockTimeDisplay').removeClass('animated pulse pulse-timing');
+            });
         $('.clockTimeDisplay').html('<p>' + obj.minutes + ':' + secondString + '</p>');
         that.tickFtns.forEach(function(ftn) {
             ftn.call(this, obj.minutes, obj.seconds);
