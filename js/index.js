@@ -2,7 +2,7 @@
 // How to update view when controller var gets to zero?
 
 $(document).ready(function($) {
-    let lengthSession = 25;
+    let lengthSession = 2;
     let lengthBreak = 5;
     let finishedSession = false;
     let t = new CountDownTimer(lengthSession);
@@ -53,6 +53,7 @@ $(document).ready(function($) {
         // $('.clock').addClass('green-pattern');
 
         if (!t.running) {
+            $(this).removeClass('blue-pattern');
             $('.clockTimeDisplay').html('<p>Clicked</p>');
             // Get duration from setting button
             // TODO: Implement setter/getters.
@@ -128,9 +129,12 @@ CountDownTimer.prototype.start = function() {
         } else {
             diff = 0;
             that.finished = true;
-            // $('.clockTimeDisplay').html('<p>Click to start timer</p>');
             that.running = false;
             // alert('Finished!');
+            $('.clockTimeDisplay').html('<p>0:00</p>')
+                                  .removeClass('animated pulse pulse-timing');
+            $('.clock').addClass('blue-pattern');
+            return false;
         }
 
         obj = CountDownTimer.parse(diff);
