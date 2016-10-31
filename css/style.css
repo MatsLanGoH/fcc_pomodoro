@@ -57,6 +57,24 @@ li {
   border-radius: 50%;
 }
 
+.green-pattern {
+  background: repeating-radial-gradient(
+    circle,
+    #36f138,
+    #36f138 10px,
+    #2dc32e 10px,
+    #2dc32e 20px);
+}
+
+.red-pattern {
+  background: repeating-radial-gradient(
+    circle,
+    #f13c36,
+    #f13c36 10px,
+    #c33f2d 10px,
+    #c33f2d 20px);
+}
+
 .clockTimeDisplay {
   font-size: 4em;
   /*position: absolute;*/

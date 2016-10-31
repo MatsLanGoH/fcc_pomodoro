@@ -1,3 +1,6 @@
+// TODO: Need to include a check what happens when the timer runs out.
+// How to update view when controller var gets to zero?
+
 $(document).ready(function($) {
     let lengthSession = 25;
     let lengthBreak = 5;
@@ -45,6 +48,10 @@ $(document).ready(function($) {
     // Start timer
     $('.clock').click(function(event) {
         /* Act on the event */
+
+        // $('.clock').removeClass('green-pattern');
+        // $('.clock').addClass('green-pattern');
+
         if (!t.running) {
             $('.clockTimeDisplay').html('<p>Clicked</p>');
             // Get duration from setting button
@@ -52,22 +59,38 @@ $(document).ready(function($) {
             t.duration = finishedSession ? lengthBreak : lengthSession;
             t.start();
             finishedSession = !finishedSession;
+
+            // Set color according to state.
+            $('.clock').addClass('green-pattern');
         } else {
             $('.clockTimeDisplay').html('<p>Paused</p>');
+            // Remove colors from clock.
+            $('.clock').addClass('red-pattern');
+
+            // $('.clock').removeClass('green-pattern red-pattern');
             // t.start();
             t.toggle();
+        }
+
+        if (!t.paused) {
+          $('.clock').removeClass('red-pattern');
+
         }
     });
 
     // Reset timer
+    // TODO: This doesn't work correctly yet.
+    //       Timer seems to keep going, or multiple timers are going.
     $('#resetButton').click(function (event) {
         if (t.paused) {
             finishedSession = !finishedSession;
-
             t.duration = finishedSession ? lengthBreak : lengthSession;
+            $('.clock').removeClass('red-pattern');
 
         };
         if (t.running) {
+            $('.clock').removeClass('red-pattern');
+
             $('.clockTimeDisplay').html('<p>Reset</p>');
             // t.duration = finishedSession ? lengthBreak : lengthSession;
             t.reset();
