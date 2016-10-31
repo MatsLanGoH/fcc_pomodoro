@@ -53,6 +53,7 @@ $(document).ready(function($) {
         // $('.clock').addClass('green-pattern');
 
         if (!t.running) {
+            $('body').removeClass('green-screen');
             $(this).removeClass('blue-pattern');
             $('.clockTimeDisplay').html('<p>Clicked</p>');
             // Get duration from setting button
@@ -134,6 +135,7 @@ CountDownTimer.prototype.start = function() {
             $('.clockTimeDisplay').html('<p>0:00</p>')
                                   .removeClass('animated pulse pulse-timing');
             $('.clock').addClass('blue-pattern');
+            $('body').addClass('green-screen');
             return false;
         }
 

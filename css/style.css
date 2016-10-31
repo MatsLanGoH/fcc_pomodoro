@@ -92,6 +92,10 @@ li {
     #2dc32e 20px);
 }
 
+.green-screen {
+  background-color: #36f138;
+}
+
 .red-pattern {
   background: repeating-radial-gradient(
     circle,
