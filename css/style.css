@@ -14,9 +14,9 @@ body {
 }
 
 button {
-  min-width: 40px;
+  min-width: 50px;
   min-height: 40px;
-  padding: 40px;
+  margin: 12px;
 }
 
 .wrapper {
@@ -29,15 +29,22 @@ button {
 }
 
 .footer {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .controls {
     /*align-content: center;*/
     /*text-align: center;*/
-    margin: 20px;
-    min-width: 35%;
+    /*margin: 20px;*/
+    /*min-width: 35%;*/
+    /*float: left;*/
     display: inline-block;
+    width: 400px;
+}
+
+.controls--set {
+    width: 200px;
+    float: left;
 }
 
 .timer-controls {
@@ -47,8 +54,8 @@ button {
 .timer-controls-setter {
   border: 0 solid;
   border-color:red;
-  /*width: 35px;*/
-  /*height: 35px;*/
+  width: 35px;
+  height: 35px;
   font-size: 1em;
   border-radius: 10%;
   background-color: #f13c36;
