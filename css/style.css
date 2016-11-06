@@ -13,18 +13,28 @@ body {
   user-select: none;
 }
 
+button {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 40px;
+}
+
 .wrapper {
-  width: 800px;
-  display: inline-block;
+  width: 100%;
+  /*display: inline-block;*/
 }
 
 .header {
   margin-top: 50px;
 }
 
-.controls {
-  display: inline-flex;
-  /*width: 100%;*/
+.control {
+    align-content: center;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px;
+    min-width: 35%;
+    display: inline-block;
 }
 
 .control {
@@ -32,6 +42,7 @@ body {
   text-align: center;
   font-size: 1.4em;
   margin: 20px;
+  display: inline-block;
 }
 
 .timer-controls {
@@ -45,12 +56,8 @@ body {
   height: 35px;
   font-size: 1em;
   /*font-weight: bold;*/
-  border-radius: 90%;
+  border-radius: 10%;
   background-color: #f13c36;
-}
-
-.timer-controls-display {
-
 }
 
 .clickable {
@@ -67,7 +74,8 @@ li {
 
 .clock {
   /*position: relative;*/
-  margin-left: 30%;
+  margin-left: auto;
+  margin-right: auto;
   height: 300px;
   width: 300px;
   border: 3px solid #0c0d0c;
