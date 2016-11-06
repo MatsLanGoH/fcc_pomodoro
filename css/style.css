@@ -25,37 +25,31 @@ button {
 }
 
 .header {
-  margin-top: 50px;
+  /*margin-top: 40px;*/
 }
 
-.control {
-    align-content: center;
-    text-align: center;
-    font-size: 1.2em;
+.footer {
+  margin-top: 40px;
+}
+
+.controls {
+    /*align-content: center;*/
+    /*text-align: center;*/
     margin: 20px;
     min-width: 35%;
     display: inline-block;
-}
-
-.control {
-  align-content: center;
-  text-align: center;
-  font-size: 1.4em;
-  margin: 20px;
-  display: inline-block;
 }
 
 .timer-controls {
   padding: 0 0;
 }
 
-
 .timer-controls-setter {
-  border: 1px solid;
-  width: 35px;
-  height: 35px;
+  border: 0 solid;
+  border-color:red;
+  /*width: 35px;*/
+  /*height: 35px;*/
   font-size: 1em;
-  /*font-weight: bold;*/
   border-radius: 10%;
   background-color: #f13c36;
 }
@@ -123,13 +117,7 @@ li {
 }
 
 .clockTimeDisplay {
-  font-size: 4em;
-  /*position: absolute;*/
-  /*top: 50%;*/
-  /*left: 50%;*/
-  /*height: 30%;*/
-  /*width: 50%;*/
-  margin: 35% 0;
-  text-align: center;
+  font-size: 3em;
+  margin: 40% 0;
 
 }
