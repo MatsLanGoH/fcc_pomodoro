@@ -7,6 +7,7 @@ $(document).ready(function($) {
     let finishedSession = false;
     let t = new CountDownTimer(lengthSession);
 
+
     $('.breakTimer').html(lengthBreak);
     $('.sessionTimer').html(lengthSession);
 
@@ -132,10 +133,15 @@ CountDownTimer.prototype.start = function() {
             that.finished = true;
             that.running = false;
             // alert('Finished!');
+            // Alarm sound
+            // Used under permission
+            // http://soundbible.com/1252-Bleep.html
+            let alarmSound = new Audio("../audio/bleep.mp3");
+
+            alarmSound.play();
             $('.clockTimeDisplay').html('<p>0:00</p>')
-                                  .removeClass('animated pulse pulse-timing');
+                                .removeClass('animated pulse pulse-timing');
             $('.clock').addClass('blue-pattern');
-            playMusic();
 
             $('body').addClass('green-screen');
             return false;
@@ -191,33 +197,4 @@ CountDownTimer.prototype.toggle = function() {
     }
     this.paused = !this.paused;
     return;
-}
-
-
-//
-// Music output
-// http://www.cyokodog.net/blog/web-audio-api-music/
-
-function playMusic() {
-  //各ノードを生成するためのベースとなるオブジェクト
-  window.AudioContext = window.AudioContext||window.webkitAudioContext; //互換対応
-  var audioContext = new AudioContext();
-
-  //音の発生源
-  var osciillatorNode = audioContext.createOscillator();
-
-  //音の出力
-  var audioDestinationNode = audioContext.destination;
-
-  //音の発生源を音の出力装置に接続！
-  osciillatorNode.connect(audioDestinationNode);
-
-  //音を鳴らす
-  osciillatorNode.start = osciillatorNode.start || osciillatorNode.noteOn; //互換対応
-  osciillatorNode.start();
-
-  //音を止める
-  setTimeout(function(){
-      osciillatorNode.stop();
-  },1000);
 }
