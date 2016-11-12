@@ -2,7 +2,7 @@
 // How to update view when controller var gets to zero?
 
 $(document).ready(function($) {
-    let lengthSession = 2;
+    let lengthSession = 25;
     let lengthBreak = 5;
     let finishedSession = false;
     let t = new CountDownTimer(lengthSession);
@@ -48,10 +48,6 @@ $(document).ready(function($) {
 
     // Start timer
     $('.clock').click(function(event) {
-        /* Act on the event */
-
-        // $('.clock').removeClass('green-pattern');
-        // $('.clock').addClass('green-pattern');
 
         if (!t.running) {
             $('body').removeClass('green-screen');
@@ -59,7 +55,7 @@ $(document).ready(function($) {
             $('.clockTimeDisplay').html('<p>Clicked</p>');
             // Get duration from setting button
             // TODO: Implement setter/getters.
-            t.duration = finishedSession ? lengthBreak : lengthSession;
+            t.duration = (finishedSession ? lengthBreak : lengthSession) * 60;
             t.start();
             finishedSession = !finishedSession;
 
@@ -67,12 +63,11 @@ $(document).ready(function($) {
             $(this).addClass('green-pattern');
         } else {
             $('.clockTimeDisplay').html('<p>Paused</p>');
+
             // Remove colors from clock.
             $(this).addClass('red-pattern');
             $(this).children().removeClass('animated pulse pulse-timing');
 
-            // $('.clock').removeClass('green-pattern red-pattern');
-            // t.start();
             t.toggle();
         }
         if (!t.paused) {
@@ -84,7 +79,7 @@ $(document).ready(function($) {
     // Reset timer
     // TODO: This doesn't work correctly yet.
     //       Timer seems to keep going, or multiple timers are going.
-    $('#resetButton').click(function(event) {
+    $('.btn--reset').click(function(event) {
         if (t.paused) {
             finishedSession = !finishedSession;
             t.duration = finishedSession ? lengthBreak : lengthSession;
@@ -127,14 +122,11 @@ CountDownTimer.prototype.start = function() {
 
         if (diff > 0) {
             timeoutID = window.setTimeout(timer, that.granularity);
-            // console.log(diff);
         } else {
             diff = 0;
             that.finished = true;
             that.running = false;
-            // alert('Finished!');
-            // Alarm sound
-            // Used under permission
+            // Audio file downloaded from
             // http://soundbible.com/1252-Bleep.html
             let alarmSound = new Audio("../audio/bleep.mp3");
 
@@ -148,10 +140,7 @@ CountDownTimer.prototype.start = function() {
         }
 
         obj = CountDownTimer.parse(diff);
-        // console.log(obj);
-        // console.log(obj.minutes);
         let secondString = obj.seconds > 9 ? obj.seconds : '0' + obj.seconds;
-        // $('.clockTimeDisplay').html('<p>Clicked</p><p> Time remaining</p><p>' + obj.minutes + ':' + secondString + '</p>');
         $('.clockTimeDisplay').addClass('animated pulse pulse-timing')
             .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                 $('.clockTimeDisplay').removeClass('animated pulse pulse-timing');
@@ -182,17 +171,19 @@ CountDownTimer.parse = function(seconds) {
 };
 
 CountDownTimer.prototype.reset = function() {
+    // Reset pause state to prevent multiple timers from spawning.
+    if (this.paused) {
+        this.paused = !this.paused;
+    }
     window.clearTimeout(timeoutID);
     this.start();
 }
 
 CountDownTimer.prototype.toggle = function() {
     if (this.paused) {
-        // console.log(timeoutID, 'Restarting');
         this.duration = diff;
         this.start();
     } else {
-        // console.log(timeoutID, this.duration, diff, 'Paused');
         window.clearTimeout(timeoutID);
     }
     this.paused = !this.paused;
