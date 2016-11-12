@@ -15,7 +15,7 @@ $(document).ready(function($) {
     // DRY up this code.
     // Decrease Break Length
     $('#decreaseBreakButton').click(function(event) {
-        if (lengthBreak > 0) {
+        if (lengthBreak > 1) {
             lengthBreak -= 1;
         }
         $('.breakTimer').html(lengthBreak);
@@ -31,7 +31,7 @@ $(document).ready(function($) {
 
     // Decrease Session Length
     $('#decreaseSessionButton').click(function(event) {
-        if (lengthSession > 0) {
+        if (lengthSession > 1) {
             lengthSession -= 1;
         }
         $('.sessionTimer').html(lengthSession);
@@ -52,7 +52,6 @@ $(document).ready(function($) {
         if (!t.running) {
             $('body').removeClass('green-screen');
             $(this).removeClass('blue-pattern');
-            $('.clockTimeDisplay').html('<p>Clicked</p>');
             // Get duration from setting button
             // TODO: Implement setter/getters.
             t.duration = (finishedSession ? lengthBreak : lengthSession) * 60;
@@ -77,8 +76,6 @@ $(document).ready(function($) {
     });
 
     // Reset timer
-    // TODO: This doesn't work correctly yet.
-    //       Timer seems to keep going, or multiple timers are going.
     $('.btn--reset').click(function(event) {
         if (t.paused) {
             finishedSession = !finishedSession;
@@ -89,7 +86,6 @@ $(document).ready(function($) {
         if (t.running) {
             $('.clock').removeClass('red-pattern');
             $('.clockTimeDisplay').html('<p>Reset</p>');
-            // t.duration = finishedSession ? lengthBreak : lengthSession;
             t.reset();
         };
     });
