@@ -2,8 +2,8 @@
 // How to update view when controller var gets to zero?
 
 $(document).ready(function($) {
-    let lengthSession = 5 //25 * 60;
-    let lengthBreak = 3 //300;
+    let lengthSession = 1500;
+    let lengthBreak = 300;
     let finishedSession = false;
     let t = new CountDownTimer(lengthSession);
 
@@ -14,15 +14,15 @@ $(document).ready(function($) {
     // TODO: The below needs to be refactored desperately.
     // DRY up this code.
     // Decrease Break Length
-    $('#decreaseBreakButton').click(function(event) {
-        if (lengthBreak > 1) {
+    $('#decreaseBreakButton').click(function() {
+        if (lengthBreak > 60) {
             lengthBreak -= 1 * 60;
         }
         $('.breakTimer').html(parseSecondsToString(lengthBreak));
     });
 
     // Increase Break Length
-    $('#increaseBreakButton').click(function(event) {
+    $('#increaseBreakButton').click(function() {
         if (lengthBreak < lengthSession) {
             lengthBreak += 1 * 60;
         }
@@ -30,16 +30,16 @@ $(document).ready(function($) {
     });
 
     // Decrease Session Length
-    $('#decreaseSessionButton').click(function(event) {
-        if (lengthSession > 1) {
+    $('#decreaseSessionButton').click(function() {
+        if (lengthSession > 60) {
             lengthSession -= 1 * 60;
         }
         $('.sessionTimer').html(parseSecondsToString(lengthSession));
     });
 
     // Increase Session Length
-    $('#increaseSessionButton').click(function(event) {
-        if (lengthSession < 60) {
+    $('#increaseSessionButton').click(function() {
+        if (lengthSession < 3600) {
             lengthSession += 1 * 60;
         }
         $('.sessionTimer').html(parseSecondsToString(lengthSession));
@@ -79,11 +79,21 @@ $(document).ready(function($) {
      * Reset timer
      */
     $('.btn--reset').click(function(event) {
+        // Unpause clock
         if (t.paused) {
             t.paused = !t.paused;
         };
+
+        // Reset clock state and color
         t.reset();
         $('.clock').removeClass('red-pattern');
+
+        // Resets colors if clock has run around.
+        // TODO: Should probably disable reset button instead.
+        if (!t.running) {
+          $('.clock').removeClass('blue-pattern');
+          $('body').removeClass('green-screen');
+        }
     });
 });
 
