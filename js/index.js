@@ -2,47 +2,47 @@
 // How to update view when controller var gets to zero?
 
 $(document).ready(function($) {
-    let lengthSession = 25;
-    let lengthBreak = 5;
+    let lengthSession = 25 * 60;
+    let lengthBreak = 300;
     let finishedSession = false;
     let t = new CountDownTimer(lengthSession);
 
 
-    $('.breakTimer').html(lengthBreak);
-    $('.sessionTimer').html(lengthSession);
+    $('.breakTimer').html(parseSecondsToString(lengthBreak));
+    $('.sessionTimer').html(parseSecondsToString(lengthSession));
 
     // TODO: The below needs to be refactored desperately.
     // DRY up this code.
     // Decrease Break Length
     $('#decreaseBreakButton').click(function(event) {
         if (lengthBreak > 1) {
-            lengthBreak -= 1;
+            lengthBreak -= 1 * 60;
         }
-        $('.breakTimer').html(lengthBreak);
+        $('.breakTimer').html(parseSecondsToString(lengthBreak));
     });
 
     // Increase Break Length
     $('#increaseBreakButton').click(function(event) {
         if (lengthBreak < lengthSession) {
-            lengthBreak += 1;
+            lengthBreak += 1 * 60;
         }
-        $('.breakTimer').html(lengthBreak);
+        $('.breakTimer').html(parseSecondsToString(lengthBreak));
     });
 
     // Decrease Session Length
     $('#decreaseSessionButton').click(function(event) {
         if (lengthSession > 1) {
-            lengthSession -= 1;
+            lengthSession -= 1 * 60;
         }
-        $('.sessionTimer').html(lengthSession);
+        $('.sessionTimer').html(parseSecondsToString(lengthSession));
     });
 
     // Increase Session Length
     $('#increaseSessionButton').click(function(event) {
         if (lengthSession < 60) {
-            lengthSession += 1;
+            lengthSession += 1 * 60;
         }
-        $('.sessionTimer').html(lengthSession);
+        $('.sessionTimer').html(parseSecondsToString(lengthSession));
     });
 
 
@@ -54,7 +54,7 @@ $(document).ready(function($) {
             $(this).removeClass('blue-pattern');
             // Get duration from setting button
             // TODO: Implement setter/getters.
-            t.duration = (finishedSession ? lengthBreak : lengthSession) * 60;
+            t.duration = finishedSession ? lengthBreak : lengthSession;
             t.start();
             finishedSession = !finishedSession;
 
@@ -78,10 +78,10 @@ $(document).ready(function($) {
     // Reset timer
     $('.btn--reset').click(function(event) {
         if (t.paused) {
-            finishedSession = !finishedSession;
+          t.toggle();
+            // finishedSession = !finishedSession;
             t.duration = finishedSession ? lengthBreak : lengthSession;
             $('.clock').removeClass('red-pattern');
-
         };
         if (t.running) {
             $('.clock').removeClass('red-pattern');
@@ -184,4 +184,19 @@ CountDownTimer.prototype.toggle = function() {
     }
     this.paused = !this.paused;
     return;
+}
+
+
+/*
+* Parse time for output
+*/
+function parseSecondsToString(seconds) {
+  var timeString  = '',
+      minuteCount     = Math.floor(seconds / 60),
+      secondCount     = seconds % 60;
+
+  secondCount = secondCount > 9 ? secondCount : '0' + secondCount;
+  timeString = minuteCount + ':' + secondCount;
+
+  return timeString;
 }

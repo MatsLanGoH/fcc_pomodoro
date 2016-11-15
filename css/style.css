@@ -38,6 +38,9 @@ button:hover {
   background-color: rgb(250, 30, 0);
   color: white;
   font-weight: bold;
+  margin: 0 auto;
+  min-width: 60px;
+  border-radius: 10px;
 }
 
 .wrapper {
@@ -156,7 +159,11 @@ li {
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    margin: -22px;
+    margin: -22px 0;
+  }
+
+  p {
+    margin-top: 20px;
   }
 
   span.hidden-text {
@@ -176,5 +183,8 @@ li {
     margin: 0 auto;
     display: block;
     margin-top: -90px;
+    /* position and z-index are needed to keep the element clickable */
+    position: relative;
+    z-index: 1;
   }
 }
