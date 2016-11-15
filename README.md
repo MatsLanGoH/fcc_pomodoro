@@ -5,8 +5,8 @@
 ## User stories (aka This clock was made for tickin')
 ### MVP
 - [OK] I can start a 25 minute pomodoro.
-- [TODO] The timer will go off once 25 minutes has elapsed.
-- [TODO] I can reset the clock for my next pomodoro.
+- [OK] The timer will go off once 25 minutes has elapsed.
+- [OK] I can reset the clock for my next pomodoro.
 - [OK] I can customize the length of each pomodoro.
 
 ## Additional features (aka That's no moon!)

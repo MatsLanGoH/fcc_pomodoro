@@ -182,7 +182,8 @@ li {
   .btn--reset {
     margin: 0 auto;
     display: block;
-    margin-top: -90px;
+    margin-top: -98px;
+    padding: 16px 12px;
     /* position and z-index are needed to keep the element clickable */
     position: relative;
     z-index: 1;
