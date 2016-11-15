@@ -2,8 +2,8 @@
 // How to update view when controller var gets to zero?
 
 $(document).ready(function($) {
-    let lengthSession = 25 * 60;
-    let lengthBreak = 300;
+    let lengthSession = 5 //25 * 60;
+    let lengthBreak = 3 //300;
     let finishedSession = false;
     let t = new CountDownTimer(lengthSession);
 
@@ -75,19 +75,15 @@ $(document).ready(function($) {
         }
     });
 
-    // Reset timer
+    /*
+     * Reset timer
+     */
     $('.btn--reset').click(function(event) {
         if (t.paused) {
-          t.toggle();
-            // finishedSession = !finishedSession;
-            t.duration = finishedSession ? lengthBreak : lengthSession;
-            $('.clock').removeClass('red-pattern');
+            t.paused = !t.paused;
         };
-        if (t.running) {
-            $('.clock').removeClass('red-pattern');
-            $('.clockTimeDisplay').html('<p>Reset</p>');
-            t.reset();
-        };
+        t.reset();
+        $('.clock').removeClass('red-pattern');
     });
 });
 
