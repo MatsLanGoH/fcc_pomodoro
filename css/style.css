@@ -135,8 +135,8 @@ li {
     margin-right: auto;
     height: 300px;
     width: 300px;
-    max-width: 75vw;
-    max-height: 75vw;
+    max-width: 72vw;
+    max-height: 72vw;
     border: 3px solid #0c0d0c;
     border-radius: 50%;
   }
@@ -148,12 +148,15 @@ li {
 
   button {
     margin: 0 auto;
+    min-width: 60px;
+    border-radius: 10px;
   }
 
   .controls {
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    margin: -22px;
   }
 
   span.hidden-text {
@@ -161,15 +164,17 @@ li {
   }
 
   .timer-controls {
-    flex-flow: column nowrap;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30%;
+    display: flex;
+    flex-flow: column-reverse nowrap;
+  }
+
+  li {
+    margin: 3px 0;
   }
 
   .btn--reset {
     margin: 0 auto;
     display: block;
-    margin-top: -85px;
+    margin-top: -90px;
   }
 }
