@@ -18,16 +18,30 @@ button {
   min-width: 40px;
   min-height: 40px;
   margin: 0 12px;
+  border: 0 solid;
+  border-color:red;
+  border-radius: 30%;
+  /*width: 35px;
+  height: 35px;*/
+  font-size: 1em;
+  background-color: #e9aa1c;
+  padding: 0;
+
+}
+
+button:hover {
+  opacity: 0.8;
+  border: 1px solid brown;
+}
+
+.btn--reset {
+  background-color: rgb(250, 30, 0);
+  color: white;
+  font-weight: bold;
 }
 
 .wrapper {
   width: 100%;
-}
-
-.header {
-}
-
-.footer {
 }
 
 .controls {
@@ -43,21 +57,6 @@ button {
   padding: 0 0;
 }
 
-.timer-controls-setter {
-  border: 0 solid;
-  border-color:red;
-  border-radius: 30%;
-  width: 35px;
-  height: 35px;
-  font-size: 1em;
-  background-color: #e9aa1c;
-}
-
-.timer-controls-setter:hover {
-  opacity: 0.8;
-  border: 1px solid brown;
-}
-
 .clickable {
   cursor: pointer;
   pointer-events: auto;
@@ -66,6 +65,8 @@ button {
 li {
   display: inline;
   text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 
@@ -122,29 +123,53 @@ li {
 .clockTimeDisplay {
   font-size: 3em;
   margin: 40% 0;
-
 }
 
-
+/*
+ * Responsive: Smartphone
+ */
 @media screen and (max-width: 419px) {
   .clock {
-    max-width: 90vw;
-    max-height: 90vw;
+    /*position: relative;*/
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    width: 300px;
+    max-width: 75vw;
+    max-height: 75vw;
+    border: 3px solid #0c0d0c;
+    border-radius: 50%;
   }
 
   .clockTimeDisplay {
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 40% 0;
+  }
 
+  button {
+    margin: 0 auto;
   }
 
   .controls {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
-    flex-flow: row nowrap;
   }
 
-  .controls--set {
-    float: none;
-    width: 50%;
+  span.hidden-text {
+    display: none;
+  }
+
+  .timer-controls {
+    flex-flow: column nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }
+
+  .btn--reset {
+    margin: 0 auto;
+    display: block;
+    margin-top: -85px;
   }
 }
